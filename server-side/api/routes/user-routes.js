@@ -1,7 +1,9 @@
+require("dotenv").config();
 const express = require("express");
 const mongoose = require("mongoose");
 const router = express.Router();
 const bcrypt = require("bcrypt");
+const jwt = require("jsonwebtoken");
 
 const User = require("../models/user-model");
 
@@ -75,8 +77,19 @@ router.post("/login", (req, res, next) => {
           });
         }
         if (result) {
+          const token = jwt.sign(
+            {
+              username: user.username,
+              userId: user._id,
+            },
+            process.env.JWT_KEY,
+            {
+              expiresIn: "1h",
+            }
+          );
           return res.status(200).json({
             message: `Auth successful`,
+            token,
           });
         }
       });

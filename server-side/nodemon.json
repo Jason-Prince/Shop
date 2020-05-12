@@ -1,5 +1,0 @@
-{
-  "env": {
-    "ATLAS_URI": "mongodb+srv://shop:shop@noteapp-nxaku.mongodb.net/noderestshop?retryWrites=true&w=majority"
-  }
-}
